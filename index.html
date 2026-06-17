@@ -71,7 +71,7 @@
 
         /* --- POST INTERFACES --- */
         .create-post { background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: 20px; padding: 18px; margin-bottom: 20px; }
-        .create-post textarea { width: 100%; border: none; background: transparent; resize: none; outline: none; font-size: 15px; height: 60px; color: var(--text-main); margin-bottom: 10px; }
+        .create-post textarea { width: 100%; border: none; background: transparent; resize: none; outline: none; font-size: 15px; height: 60px; color: var(--text-main); }
         .gallery-trigger-bar { display: flex; gap: 10px; margin-top: 12px; }
         .gallery-btn { flex: 1; background: rgba(255, 255, 255, 0.05); border: 1px dashed var(--glass-border); color: white; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .media-preview-container { display: none; position: relative; margin-top: 15px; border-radius: 12px; overflow: hidden; max-height: 200px; border: 1px solid var(--accent-color); }
@@ -135,19 +135,11 @@
         .nav-item.active { color: var(--accent-color); }
         .nav-item.admin-nav-tab { color: #ffbb008f; }
         .nav-item.admin-nav-tab.active { color: var(--admin-gold) !important; text-shadow: 0 0 10px var(--admin-glow); }
-
-        /* --- 🆕 FILTER CHIPS & TOAST STYLING --- */
-        .chip { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--glass-border); transition: 0.2s; cursor: pointer; }
-        .chip.active { background: var(--accent-color); color: white; border-color: var(--accent-color); box-shadow: 0 0 15px var(--accent-glow); }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <div class="emoji-bg" id="emojiCanvas"></div>
-
-    <!-- 🆕 TOAST NOTIFICATION CONTAINER -->
-    <div id="notificationToastContainer" style="position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none;"></div>
 
     <div id="authScreen">
         <div class="auth-container">
@@ -202,7 +194,7 @@
                 <input type="file" id="galleryVideoInput" accept="video/*" style="display: none;" onchange="processGalleryFile(this, 'video')">
 
                 <div class="gallery-trigger-bar">
-                    <button class="gallery-btn" onclick="document.getElementById('galleryPhotoInput').click()"><i class="fa-solid fa-image" style="color: #4cd964;"></i> Attach Image</button>
+                    <button class="gallery-btn" onclick="document.getElementById('galleryPhotoInput').click()"><i class="fa-solid fa-image" style="color: #4cd96 green;"></i> Attach Image</button>
                     <button class="gallery-btn" onclick="document.getElementById('galleryVideoInput').click()"><i class="fa-solid fa-video" style="color: #ff3b30;"></i> Attach Video</button>
                 </div>
 
@@ -211,25 +203,8 @@
                     <div id="previewTargetSlot" style="width:100%; height:100%;"></div>
                 </div>
 
-                <!-- 🆕 CATEGORY SELECT FIELD -->
-                <select id="postCategory" style="width: auto; background: var(--bg-primary); border: 1px solid var(--glass-border); color: white; padding: 8px 12px; border-radius: 10px; float: left; margin-top: 12px; outline: none; font-size: 13px;">
-                    <option value="General">📌 General</option>
-                    <option value="Code">💻 Code Logs</option>
-                    <option value="3D Design">🎨 3D Design</option>
-                    <option value="Security">🛡️ Security</option>
-                </select>
-
                 <button class="auth-btn" style="width: auto; float: right; padding: 8px 20px; margin-top: 12px;" onclick="createPost()">Deploy Post</button>
                 <div style="clear: both;"></div>
-            </div>
-
-            <!-- 🆕 DYNAMIC FILTER CHIPS ROW -->
-            <div class="filter-chips-row" style="display:flex; gap:8px; margin-bottom:15px; overflow-x:auto; padding-bottom:5px;">
-                <button class="chip active" onclick="filterFeed('all', this)">All Nodes</button>
-                <button class="chip" onclick="filterFeed('General', this)">General</button>
-                <button class="chip" onclick="filterFeed('Code', this)">Code Logs</button>
-                <button class="chip" onclick="filterFeed('3D Design', this)">3D Design</button>
-                <button class="chip" onclick="filterFeed('Security', this)">Security</button>
             </div>
             
             <div id="feedArea"></div>
@@ -307,25 +282,25 @@
         import { 
             getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut 
         } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
-        // 🆕 FIREBASE STORAGE SDK MODULE IMPORTS Added HERE
-        import { 
-            getStorage, ref, uploadBytes, getDownloadURL 
-        } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js";
 
-        const firebaseConfig = {
-            apiKey: "[Aadhaar Redacted]", 
-            authDomain: "optical-wall-434100-g5.firebaseapp.com",
-            projectId: "optical-wall-434100-g5",
-            storageBucket: "optical-wall-434100-g5.appspot.com",
-            messagingSenderId: "363477331113",
-            appId: "1:363477331113:web:8dfa36558ca19d3ffee0a8"
-        };
+        // =======================================================
+        // 🚀 आपके प्रोजेक्ट क्रेडेंशियल्स सफलतापूर्वक फिक्स कर दिए गए हैं!
+        // =======================================================
+        // Firebase Configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBNJ9WTZc-96w3SsMBgMdKRfX9C-N4_oj4",
+    authDomain: "optical-wall-434100-g5.firebaseapp.com",
+    projectId: "optical-wall-434100-g5",
+    storageBucket: "optical-wall-434100-g5.appspot.com",
+    messagingSenderId: "363477331113",
+    appId: "1:363477331113:web:8dfa36558ca19d3ffee0a8",
+    measurementId: "G-WVQP99RRTC"
+};
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        const storage = getStorage(app); // 🆕 Initializing Cloud Storage Reference
-
+// Firebase Initialize
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
         // SYSTEM ECOSYSTEM STATE MANAGERS
         let localFallbackDatabase = [];
         let activeUserSession = JSON.parse(localStorage.getItem('bunnii_app_session')) || null;
@@ -335,9 +310,6 @@
         let targetSharePostId = null; 
         let isSignUpMode = false;
         let unsubscribeChatListener = null;
-        let unsubscribeNotificationListener = null; // 🆕 Track active live notifications
-        let currentFeedFilter = 'all'; // 🆕 Real-time category selector state
-        let globalCachedPosts = []; // 🆕 Storage cache engine to support local filter processing
 
         // REALTIME SYNC ENGINE FOR DATA ROUTING
         function initRealtimeDatabaseSync() {
@@ -359,57 +331,12 @@
 
             const postsQuery = query(collection(db, "posts"), orderBy("timestamp", "desc"));
             onSnapshot(postsQuery, (snapshot) => {
-                globalCachedPosts = [];
+                const posts = [];
                 snapshot.forEach(docNode => {
-                    globalCachedPosts.push(docNode.data());
+                    posts.push(docNode.data());
                 });
-                applyFeedFilterAndRender(); // 🆕 Run through filtering logic mapping engine
+                renderPostsFeed(posts);
             });
-        }
-
-        // 🆕 LIVE TOAST RUNNER LOGIC
-        function initNotificationListener() {
-            if(unsubscribeNotificationListener) unsubscribeNotificationListener();
-            const notifyQuery = query(collection(db, "notifications"), orderBy("timestamp", "desc"));
-            
-            unsubscribeNotificationListener = onSnapshot(notifyQuery, (snapshot) => {
-                snapshot.docChanges().forEach((change) => {
-                    if (change.type === "added") {
-                        let notif = change.doc.data();
-                        if(activeUserSession && notif.receiver === activeUserSession.email && notif.sender !== activeUserSession.email) {
-                            if(Date.now() - notif.timestamp < 8000) { // Limit threshold to eliminate history loading notifications bursts
-                                window.showToastNotification(notif.message);
-                            }
-                        }
-                    }
-                });
-            });
-        }
-
-        window.showToastNotification = function(msg) {
-            const container = document.getElementById('notificationToastContainer');
-            if(!container) return;
-            const toast = document.createElement('div');
-            toast.style.cssText = "background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--accent-color); color: white; padding: 12px 18px; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); pointer-events: auto; animation: fadeIn 0.3s ease; display:flex; align-items:center; gap:10px; max-width:300px; font-size:13px; font-weight:600;";
-            toast.innerHTML = `<i class="fa-solid fa-bell" style="color: var(--accent-color); font-size:15px;"></i> <span>${msg}</span>`;
-            container.appendChild(toast);
-            setTimeout(() => { toast.remove(); }, 4000);
-        };
-
-        // 🆕 FILTER CORE CHIP ROUTING FUNCTION
-        window.filterFeed = function(category, element) {
-            currentFeedFilter = category;
-            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-            element.classList.add('active');
-            applyFeedFilterAndRender();
-        };
-
-        function applyFeedFilterAndRender() {
-            let processedList = globalCachedPosts;
-            if(currentFeedFilter !== 'all') {
-                processedList = globalCachedPosts.filter(p => p.category === currentFeedFilter);
-            }
-            renderPostsFeed(processedList);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -516,25 +443,20 @@
             }
         };
 
-        // 🆕 CLOUD STORAGE SUPPORT FOR USER AVATARS LOGIC
         window.updateProfilePictureEngine = async function(input) {
             if (input.files && input.files[0] && activeUserSession) {
-                try {
-                    const file = input.files[0];
-                    const storageRef = ref(storage, `profiles/${activeUserSession.uid}_avatar_${Date.now()}`);
-                    const snapshot = await uploadBytes(storageRef, file);
-                    const downloadUrl = await getDownloadURL(snapshot.ref);
-
-                    document.getElementById('myProfilePic').style.backgroundImage = `url('${downloadUrl}')`;
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    const imgString = e.target.result;
+                    document.getElementById('myProfilePic').style.backgroundImage = `url('${imgString}')`;
                     
-                    activeUserSession.avatar = downloadUrl;
+                    activeUserSession.avatar = imgString;
                     localStorage.setItem('bunnii_app_session', JSON.stringify(activeUserSession));
                     
-                    await updateDoc(doc(db, "users", activeUserSession.uid), { avatar: downloadUrl });
-                    alert("Profile visual configuration committed via Storage Infrastructure!");
-                } catch(err) {
-                    alert("Avatar Upload Error: " + err.message);
-                }
+                    await updateDoc(doc(db, "users", activeUserSession.uid), { avatar: imgString });
+                    alert("Profile visual configuration committed!");
+                };
+                reader.readAsDataURL(input.files[0]);
             }
         };
 
@@ -583,7 +505,6 @@
             renderScannedUserCard(scannedUserNode, targetOutputCard);
         };
 
-        // 🆕 UPDATED ENGINE TO SEND FOLLOW ALERTS
         window.triggerFollowEngine = async function(recipientEmail) {
             let recipientUser = localFallbackDatabase.find(u => u.email === recipientEmail);
             if(!recipientUser || !activeUserSession) return;
@@ -597,71 +518,36 @@
             await updateDoc(doc(db, "users", activeUserSession.uid), { following: myFollowing });
             await updateDoc(doc(db, "users", recipientUser.uid), { followers: peerFollowers });
 
-            // 🆕 Route Realtime Notification Packet to Database Target
-            await addDoc(collection(db, "notifications"), {
-                sender: activeUserSession.email,
-                receiver: recipientEmail,
-                message: `@${activeUserSession.username} initialized connection matrix with your node!`,
-                timestamp: Date.now()
-            });
-
             alert("Handshake achieved!");
             executeGlobalSearch();
         };
 
-        // 🆕 STORAGE & CATEGORY OPTIMIZED POST CREATION LOGIC
         window.createPost = async function() {
             const description = document.getElementById('postText').value;
-            const categorySelection = document.getElementById('postCategory').value;
             if(!description.trim() && !base64MediaCache) return;
 
             const timeNow = new Date();
             const formattedDateString = timeNow.toLocaleDateString() + ' @ ' + timeNow.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
             const idToken = 'p_' + Date.now();
 
-            let targetImgUrl = "";
-            let targetVidUrl = "";
+            const postPayload = {
+                id: idToken, 
+                user: activeUserSession.username, 
+                email: activeUserSession.email, 
+                avatar: activeUserSession.avatar,
+                text: description, 
+                img: (cachedMediaType === 'image' ? base64MediaCache : ""), 
+                vid: (cachedMediaType === 'video' ? base64MediaCache : ""),
+                likes: 0, 
+                timestamp: timeNow.getTime(),
+                timestampString: formattedDateString, 
+                assetUrl: `https://bunnii.media/posts/view?id=${idToken}`,
+                countryFlag: activeUserSession.countryFlag || '🌐'
+            };
 
-            try {
-                // If media attachment exists, process file to Cloud Storage Engine bucket array instead of Base64 strings
-                if (cachedMediaType === 'image') {
-                    const fileObj = document.getElementById('galleryPhotoInput').files[0];
-                    if(fileObj) {
-                        const storageRef = ref(storage, `posts/images/${idToken}_${fileObj.name}`);
-                        const snap = await uploadBytes(storageRef, fileObj);
-                        targetImgUrl = await getDownloadURL(snap.ref);
-                    }
-                } else if (cachedMediaType === 'video') {
-                    const fileObj = document.getElementById('galleryVideoInput').files[0];
-                    if(fileObj) {
-                        const storageRef = ref(storage, `posts/videos/${idToken}_${fileObj.name}`);
-                        const snap = await uploadBytes(storageRef, fileObj);
-                        targetVidUrl = await getDownloadURL(snap.ref);
-                    }
-                }
-
-                const postPayload = {
-                    id: idToken, 
-                    user: activeUserSession.username, 
-                    email: activeUserSession.email, 
-                    avatar: activeUserSession.avatar,
-                    text: description, 
-                    category: categorySelection, // Saved Category Tag Configuration
-                    img: targetImgUrl, 
-                    vid: targetVidUrl,
-                    likes: 0, 
-                    timestamp: timeNow.getTime(),
-                    timestampString: formattedDateString, 
-                    assetUrl: `https://bunnii.media/posts/view?id=${idToken}`,
-                    countryFlag: activeUserSession.countryFlag || '🌐'
-                };
-
-                await setDoc(doc(db, "posts", idToken), postPayload);
-                document.getElementById('postText').value = ""; 
-                clearSelectedMedia();
-            } catch(e) {
-                alert("Post Deployment Failed: " + e.message);
-            }
+            await setDoc(doc(db, "posts", idToken), postPayload);
+            document.getElementById('postText').value = ""; 
+            clearSelectedMedia();
         };
 
         window.adminModerateDeletePost = async function(postId) {
@@ -712,29 +598,18 @@
             if(unsubscribeChatListener) { unsubscribeChatListener(); unsubscribeChatListener = null; }
         };
 
-        // 🆕 UPDATED CHAT ROUTINE FOR REALTIME TRANSMISSION NOTIFICATIONS
         window.sendSecureMessage = async function() {
             const inputFieldElement = document.getElementById('chatMsgInputField'); 
             if(!inputFieldElement || !inputFieldElement.value.trim() || !selectedChatUser) return;
             
-            let currentTextPayload = inputFieldElement.value;
             let packetMessage = { 
                 sender: activeUserSession.email, 
                 receiver: selectedChatUser.email, 
-                text: currentTextPayload, 
+                text: inputFieldElement.value, 
                 timestamp: Date.now() 
             };
 
             await addDoc(collection(db, "messages"), packetMessage);
-
-            // 🆕 Trigger Live Alert Document directly linked to notification toast dispatcher engine
-            await addDoc(collection(db, "notifications"), {
-                sender: activeUserSession.email,
-                receiver: selectedChatUser.email,
-                message: `Incoming stream from @${activeUserSession.username}: "${currentTextPayload.substring(0,22)}..."`,
-                timestamp: Date.now()
-            });
-
             inputFieldElement.value = "";
         };
 
@@ -846,7 +721,6 @@
 
             window.loadChatTerminalUsers();
             if(selectedChatUser) streamMessages();
-            initNotificationListener(); // 🆕 Engage the Toast System listeners array once user state validates successfully
         }
 
         function triggerInlineAdminEngineRefresh() {
@@ -918,7 +792,6 @@
             outputBox.appendChild(container);
         }
 
-        // 🆕 OPTIMIZED TIMELINE DISTRIBUTION LIST LOGIC
         function renderPostsFeed(posts) {
             const feedAreaBox = document.getElementById('feedArea'); 
             const profileFeedBox = document.getElementById('myPostsArea');
@@ -930,10 +803,6 @@
 
             posts.forEach(p => {
                 renderTimelineBlock(p, feedAreaBox);
-            });
-
-            // Make sure profile always prints un-filtered personal posts accurately
-            globalCachedPosts.forEach(p => {
                 if(activeUserSession && p.email === activeUserSession.email) { 
                     generatedPostIndexCount++; 
                     renderTimelineBlock(p, profileFeedBox); 
@@ -944,7 +813,7 @@
                 document.getElementById('statPostsCount').innerText = generatedPostIndexCount;
             }
             if(document.getElementById('inlineAdminPostsCount')) {
-                document.getElementById('inlineAdminPostsCount').innerText = globalCachedPosts.length;
+                document.getElementById('inlineAdminPostsCount').innerText = posts.length;
             }
         }
 
@@ -970,16 +839,13 @@
                 creatorDeletePostBtnMarkup = `<button class="sec-btn inline-terminate-btn" style="border-color:crimson; color:crimson; font-size:11px; padding:2px 6px;"><i class="fa-solid fa-trash-can"></i> Terminate Post</button>`;
             }
 
-            // 🆕 Integrated inline category display pill tag logic inside timeline header layout mapping
             card.innerHTML = `
                 <div class="post-header">
                     <span class="post-user">
                         <div class="post-avatar" style="background-image:url('${data.avatar}')"></div>
                         <div>
                             <div style="display:flex; align-items:center; gap:4px;">
-                                <strong>@${data.user}</strong> ${data.countryFlag || '🌐'} 
-                                <span style="font-size:10px; background:rgba(255,255,255,0.08); padding:2px 6px; border-radius:6px; color:var(--text-muted); margin-left:5px;">${data.category || 'General'}</span>
-                                <span class="inline-action-slot">${timelineContextInlineActionBtnMarkup}</span>
+                                <strong>@${data.user}</strong> ${data.countryFlag || '🌐'} <span class="inline-action-slot">${timelineContextInlineActionBtnMarkup}</span>
                             </div>
                             <div class="post-timestamp">${data.timestampString}</div>
                         </div>
