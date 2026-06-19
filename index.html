@@ -365,25 +365,23 @@
         } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 
         // =======================================================
-        // 🚀 OBFUSCATED SECURE METADATA LAYER (FIXED & DECODED SAFELY)
+        // 🚀 CLEAN & RELIABLE FIREBASE CONFIGURATION LAYER
         // =======================================================
-        const _0xec41 = ["QUl6YVN5Qk5KOVdUWmMtOTZ3U3NNQmdNZEtSZlg5Qy1ONF9vajQ=", "b3B0aWNhbC13YWxsLTQzNDEwMC1nNS5maXJlYmFzZWFwcC5jb20=", "b3B0aWNhbC13YWxsLTQzNDEwMC1nNQ==", "b3B0aWNhbC13YWxsLTQzNDEwMC1nNS5hcHBzcG90LmNvbQ==", "MzYzNDc3MzMxMTEz", "MTozNjM0NzczMzExMTM6d2ViOjhkZmEzNjU1OGNhMTlkM2ZmZWVhOGM=", "Ry1XVk9QOTlSUlRD", "YnVubmlpLm1lZGlhLmFkbWluQGdtYWlsLmNvbQ=="];
-        
         const firebaseConfig = {
-            apiKey: atob(_0xec41[0]),
-            authDomain: atob(_0xec41[1]),
-            projectId: atob(_0xec41[2]),
-            storageBucket: atob(_0xec41[3]), 
-            messagingSenderId: atob(_0xec41[4]),
-            appId: atob(_0xec41[5]),
-            measurementId: atob(_0xec41[6])
+            apiKey: "AIzaSyBNJ9WTZc-96wSsMgMdKRfX9C-N4_oj4", 
+            authDomain: "optical-wall-434100-g5.firebaseapp.com",
+            projectId: "optical-wall-434100-g5",
+            storageBucket: "optical-wall-434100-g5.appspot.com", 
+            messagingSenderId: "363477331113",
+            appId: "1:363477331113:web:8dfa36558ca19d3ffeea8c",
+            measurementId: "G-WVOP99RRTC"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        const ADMIN_EMAIL = atob(_0xec41[7]); 
+        const ADMIN_EMAIL = "bunnii.media.admin@gmail.com"; 
 
         // STATE OBJECTS
         let localFallbackDatabase = [];
@@ -1250,7 +1248,7 @@
                         let injectionMarkup = validationShareState ? `<div class="shared-card-bubble">${m.text.replace(/\n/g, '<br>')}</div>` : m.text;
                         let bubbleClass = (m.sender === activeUserSession.email) ? 'msg-sent' : 'msg-received';
                         
-                        // TELEGRAM SELF-DESTRUCT ENGINE (FIXED LOOP & CALLSTACK ERROR)
+                        // TELEGRAM SELF-DESTRUCT ENGINE
                         if(m.destructTimer && m.destructTimer > 0) {
                             let msElapsed = Date.now() - m.timestamp;
                             let secElapsed = Math.floor(msElapsed / 1000);
