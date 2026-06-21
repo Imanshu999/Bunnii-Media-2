@@ -590,30 +590,45 @@
 
         window.toggleQRScannerCameraEngine = function() {
             document.getElementById('scannerModalWrapper').style.display = "flex";
-            qrScannerInstance = new Instascan.Scanner({ video: document.getElementById('qrScannerHardwareFeed') });
-            qrScannerInstance.addListener('scan', function(content) {
-                if(content) {
-                    window.closeQRScannerCameraEngine();
-                    if(content.includes('#profile?username=')) {
-                        let extractedHandle = content.split('#profile?username=')[1];
-                        window.launchUserProfileInspectorModal(extractedHandle);
-                    } else if(content.includes('#post?id=')) {
-                        let extractedPostId = content.split('#post?id=')[1];
-                        window.location.hash = `post?id=${extractedPostId}`;
-                        processDeepLinkHashingEvaluation();
-                    } else {
-                        alert("Scanned token payload: " + content);
+            
+            // Explicit Browser Camera Authorization Request
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+            .then(function(stream) {
+                // Instascan engine initialization
+                qrScannerInstance = new Instascan.Scanner({ video: document.getElementById('qrScannerHardwareFeed'), scanPeriod: 5 });
+                
+                qrScannerInstance.addListener('scan', function(content) {
+                    if(content) {
+                        window.closeQRScannerCameraEngine();
+                        if(content.includes('#profile?username=')) {
+                            let extractedHandle = content.split('#profile?username=')[1];
+                            window.launchUserProfileInspectorModal(extractedHandle);
+                        } else if(content.includes('#post?id=')) {
+                            let extractedPostId = content.split('#post?id=')[1];
+                            window.location.hash = `post?id=${extractedPostId}`;
+                            processDeepLinkHashingEvaluation();
+                        } else {
+                            alert("Scanned token payload: " + content);
+                        }
                     }
-                }
+                });
+
+                Instascan.Camera.getCameras().then(function(cameras) {
+                    if(cameras.length > 0) {
+                        // Priority to back camera if available
+                        let selectedCamera = cameras.find(c => c.name.toLowerCase().includes('back') || c.name.toLowerCase().includes('environment')) || cameras[0];
+                        qrScannerInstance.start(selectedCamera);
+                    } else {
+                        alert('No capture hardware device discovered.');
+                        window.closeQRScannerCameraEngine();
+                    }
+                }).catch(function(e) { alert("Camera selection error: " + e); window.closeQRScannerCameraEngine(); });
+                
+            })
+            .catch(function(err) {
+                alert("Camera Access Denied: Please allow camera permissions in your browser system settings.");
+                document.getElementById('scannerModalWrapper').style.display = "none";
             });
-            Instascan.Camera.getCameras().then(function(cameras) {
-                if(cameras.length > 0) {
-                    qrScannerInstance.start(cameras[0]);
-                } else {
-                    alert('No capture hardware device discovered.');
-                    window.closeQRScannerCameraEngine();
-                }
-            }).catch(function(e) { alert(e); window.closeQRScannerCameraEngine(); });
         };
 
         window.closeQRScannerCameraEngine = function() {
